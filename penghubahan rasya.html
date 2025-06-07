@@ -10,18 +10,18 @@
                 assignments: '<span class="bad">OMAGAAA!?!</span>',
                 discipline: '<span class="excellent">PAKE NANYA</span>',
                 understanding: '<span class="bad">-99999</span>',
-                grades: '<span class="excellent">∞</span>',
-                activity: '<span class="excellent">ML NO #1🔥🔥</span>'
+                grades: '<span class="good">∞</span>',
+                activity: '<span class="medium">ML NO #1🔥🔥</span>'
             };
             return specialCategories[criteria];
         }
 
         // Normal category calculation for other students
         if (typeof value !== 'number') return '-';
-        if (value < 40) return '<span class="bad">Buruk</span>';
-        if (value < 70) return '<span class="medium">Cukup</span>';
-        if (value < 90) return '<span class="good">Baik</span>';
-        return '<span class="excellent">Sangat Baik</span>';
+        if (value < 40) return '<span class="bad">DONGOO</span>';
+        if (value < 70) return '<span class="medium">SALAM BOOYAH</span>';
+        if (value < 90) return '<span class="good">ALBERT EINSTEIN</span>';
+        return '<span class="excellent">MAHKOTA MU KETINGGALAN KING 👑</span>';
     }
 
     // Event listener for select change
