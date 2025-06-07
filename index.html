@@ -91,7 +91,7 @@
             <option value="MUHAMAD FAHRI MAULIDAN">MUHAMAD FAHRI MAULIDAN</option>
             <option value="MUHAMAD SABIT">MUHAMAD SABIT</option>
             <option value="MUHAMMAD BADAR">MUHAMMAD BADAR</option>
-            <option value="MUHAMMAD RASYA ANNABIL 🤫🧏‍♂️">MUHAMMAD RASYA ANNABIL 🤫</option>
+            <option value="MUHAMMAD RASYA ANNABIL 🤫🧏‍♂️">MUHAMMAD RASYA ANNABIL 🤫🧏‍♂️</option>
             <option value="MUTIARA LARASSATI FITRAH">MUTIARA LARASSATI FITRAH</option>
             <option value="NABILLA SABRINA">NABILLA SABRINA</option>
             <option value="NATASYA AULIA RAHMAN">NATASYA AULIA RAHMAN</option>
@@ -220,7 +220,7 @@
         const studentData = {
             "ALIFMAN HAKIM": { attendance: 90, assignments: 70, discipline: 90, understanding: 65, grades: 70, activity: 87 },
             "DESVIRA AINNUR RAHMA": { attendance: 98, assignments: 35, discipline: 86, understanding: 20, grades: 25, activity: 30 },
-            "DIRA SALSA NUR AISYAH": { attendance: 95, assignments: 90, discipline: 100, understanding: 99, grades: 92, activity: 98 },
+            "DIRA SALSA NUR AISYAH": { attendance: 98, assignments: 96, discipline: 100, understanding: 99, grades: 97, activity: 98 },
             "HUSEIN AL HADJI": { attendance: 98, assignments: 97, discipline: 99, understanding: 96, grades: 95, activity: 94 },
             "ANASOFYA AAQILAH FARAH DILLA": { attendance: 92, assignments: 80, discipline: 93, understanding: 35, grades: 80, activity: 88 },
             "FAREL OKTAVINO": { attendance: 90, assignments: 85, discipline: 90, understanding: 81, grades: 82, activity: 80 },
@@ -257,7 +257,22 @@
         };
         
         // Function to get category based on value
-        function getCategory(value) {
+        function getCategory(criteria, value) {
+            // Special case for Muhammad Rasya Annabil
+            if (selectedName.textContent === "MUHAMMAD RASYA ANNABIL 🤫🧏‍♂️") {
+                const specialCategories = {
+                    attendance: '<span class="excellent">WOILAH MAHKOTA MU KING 👑</span>',
+                    assignments: '<span class="excellent">TUNG TUNG SAHUR</span>',
+                    discipline: '<span class="excellent">TAHU EASY</span>',
+                    understanding: '<span class="bad">DONGOO</span>',
+                    grades: '<span class="excellent">ALBERT EINSTEIN</span>',
+                    activity: '<span class="excellent">SALAM BOOYAH</span>'
+                };
+                return specialCategories[criteria];
+            }
+
+            // Normal category calculation for other students
+            if (typeof value !== 'number') return '-';
             if (value < 40) return '<span class="bad">Buruk</span>';
             if (value < 70) return '<span class="medium">Cukup</span>';
             if (value < 90) return '<span class="good">Baik</span>';
@@ -282,7 +297,7 @@
                 ];
                 
                 // Update radar chart
-                radarChart.data.datasets[0].data = values;
+                radarChart.data.datasets[0].data = values.map(val => typeof val === 'number' ? val : 0);
                 radarChart.update();
                 
                 // Update table values
@@ -293,13 +308,13 @@
                 document.getElementById('gradesValue').textContent = stats.grades;
                 document.getElementById('activityValue').textContent = stats.activity;
                 
-                // Update categories with colors
-                document.getElementById('attendanceCategory').innerHTML = getCategory(stats.attendance);
-                document.getElementById('assignmentsCategory').innerHTML = getCategory(stats.assignments);
-                document.getElementById('disciplineCategory').innerHTML = getCategory(stats.discipline);
-                document.getElementById('understandingCategory').innerHTML = getCategory(stats.understanding);
-                document.getElementById('gradesCategory').innerHTML = getCategory(stats.grades);
-                document.getElementById('activityCategory').innerHTML = getCategory(stats.activity);
+                // Update categories with colors - now passing criteria name
+                document.getElementById('attendanceCategory').innerHTML = getCategory('attendance', stats.attendance);
+                document.getElementById('assignmentsCategory').innerHTML = getCategory('assignments', stats.assignments);
+                document.getElementById('disciplineCategory').innerHTML = getCategory('discipline', stats.discipline);
+                document.getElementById('understandingCategory').innerHTML = getCategory('understanding', stats.understanding);
+                document.getElementById('gradesCategory').innerHTML = getCategory('grades', stats.grades);
+                document.getElementById('activityCategory').innerHTML = getCategory('activity', stats.activity);
             } else {
                 selectedName.textContent = '';
                 
@@ -317,4 +332,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
